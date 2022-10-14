@@ -1,0 +1,30 @@
+Sub Delet_Invalid_Rows()
+
+Worksheets("Main").Select
+
+Range("A2").Select
+
+    Do Until ActiveCell.Value = ""
+    
+    If Not IsDate(ActiveCell.Offset(0, 1).Value) Then
+    Range(ActiveCell, ActiveCell.End(xlToRight)).Copy
+    Sheets("Errors").Select
+    Range("A100").Select
+    Selection.End(xlUp).Select
+    ActiveCell.Offset(1, 0).Select
+    Selection.PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+    
+    Sheets("Main").Select
+    ActiveCell.EntireRow.Delete
+    
+    
+    Else
+    
+    ActiveCell.Offset(1, 0).Select
+    
+    End If
+    
+    
+    Loop
+
+End Sub
